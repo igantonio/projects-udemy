@@ -1,9 +1,7 @@
 package com.spring.course.restfulspringbootaws.domain;
 
 import com.spring.course.restfulspringbootaws.domain.enums.RequestState;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter @Setter
 @Entity(name = "request")
 public class Request  implements Serializable {
 

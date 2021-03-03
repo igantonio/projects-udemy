@@ -2,17 +2,19 @@ package com.spring.course.restfulspringbootaws.domain;
 
 import com.spring.course.restfulspringbootaws.domain.enums.Role;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Entity(name = "user")
 public class User implements Serializable {
 

@@ -13,7 +13,7 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 
     List<Request> findAllByOwnerId(Long id);
 
-    @Query(value = "UPDATE REQUEST SET STATE = :state WHERE id = :id", nativeQuery = true)
+    @Query(value = "UPDATE request SET STATE = :state WHERE id = :id", nativeQuery = true)
     Request updateStatus(Long id, RequestStage state);
 
 }
