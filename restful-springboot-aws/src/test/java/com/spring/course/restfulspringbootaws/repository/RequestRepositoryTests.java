@@ -1,7 +1,6 @@
 package com.spring.course.restfulspringbootaws.repository;
 
 import com.spring.course.restfulspringbootaws.domain.Request;
-import com.spring.course.restfulspringbootaws.domain.RequestStage;
 import com.spring.course.restfulspringbootaws.domain.User;
 import com.spring.course.restfulspringbootaws.domain.enums.RequestState;
 import com.spring.course.restfulspringbootaws.domain.enums.Role;
@@ -35,7 +34,6 @@ public class RequestRepositoryTests {
         User owner = new User();
         owner.setId(1L);
         Request request = new Request(null, "Novo Leptop HP", "Pretendo obter um laptop HP", new Date(), RequestState.OPEN, owner, null);
-
 
         Request createdRequest = requestRepository.save(request);
 
