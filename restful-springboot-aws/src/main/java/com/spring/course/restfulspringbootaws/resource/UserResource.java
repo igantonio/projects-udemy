@@ -1,7 +1,9 @@
 package com.spring.course.restfulspringbootaws.resource;
 
+import com.spring.course.restfulspringbootaws.domain.Request;
 import com.spring.course.restfulspringbootaws.domain.User;
 import com.spring.course.restfulspringbootaws.dto.UserLoginDto;
+import com.spring.course.restfulspringbootaws.service.RequestService;
 import com.spring.course.restfulspringbootaws.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,9 +19,12 @@ public class UserResource {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RequestService requestService;
+
     @PostMapping
     public ResponseEntity<User> save(@RequestBody User user) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.save(user));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
     }
 
     @PutMapping("/{id}")
@@ -45,5 +50,9 @@ public class UserResource {
                 .body(userService.login(userLoginDto.getEmail(), userLoginDto.getPassword()));
     }
 
+    @GetMapping("/{id}/requests")
+    public ResponseEntity<List<Request>> listAllRequestsByOwnerId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(requestService.listAllByOwnerId(id));
+    }
 
 }
