@@ -59,7 +59,7 @@ public class RequestStageRepositoryTests {
 
     @Test
     public void listByRequestIdTest() {
-        List<RequestStage> stages = requestStageRepository.findAll();
+        List<RequestStage> stages = requestStageRepository.findAllByRequestId(1L);
 
         Assertions.assertEquals(1, stages.size());
     }
