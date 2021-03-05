@@ -3,13 +3,11 @@ package com.spring.course.restfulspringbootaws.repository;
 
 import com.spring.course.restfulspringbootaws.domain.User;
 import com.spring.course.restfulspringbootaws.domain.enums.Role;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-import java.util.Optional;
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
