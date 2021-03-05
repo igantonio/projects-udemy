@@ -1,7 +1,9 @@
 package com.spring.course.restfulspringbootaws.resource;
 
 import com.spring.course.restfulspringbootaws.domain.Request;
+import com.spring.course.restfulspringbootaws.domain.RequestStage;
 import com.spring.course.restfulspringbootaws.service.RequestService;
+import com.spring.course.restfulspringbootaws.service.RequestStageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,9 @@ public class RequestResource {
 
     @Autowired
     private RequestService requestService;
+
+    @Autowired
+    private RequestStageService requestStageService;
 
     @PostMapping
     public ResponseEntity<Request> save(@RequestBody Request request) {
@@ -35,6 +40,11 @@ public class RequestResource {
     @GetMapping()
     public ResponseEntity<List<Request>> listAll() {
         return ResponseEntity.ok(requestService.listAll());
+    }
+
+    @GetMapping("/{id}/request-stages")
+    public ResponseEntity<List<RequestStage>> listAllStagesByRequestId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(requestStageService.listAllByRequestId(id));
     }
 
 
