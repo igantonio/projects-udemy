@@ -1,10 +1,8 @@
 package com.spring.course.restfulspringbootaws.service;
 
 import com.spring.course.restfulspringbootaws.domain.Request;
-import com.spring.course.restfulspringbootaws.domain.User;
 import com.spring.course.restfulspringbootaws.domain.enums.RequestState;
 import com.spring.course.restfulspringbootaws.repository.RequestRepository;
-import com.spring.course.restfulspringbootaws.service.util.HashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +33,8 @@ public class RequestService {
         return requestRepository.findAll();
     }
 
-    public List<Request> listAllByOwnerId(Long id) {
-        return requestRepository.findAllByOwnerId(id);
+    public List<Request> listAllByOwnerId(Long ownerId) {
+        return requestRepository.findAllByOwnerId(ownerId);
     }
 
 }
