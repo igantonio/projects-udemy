@@ -1,5 +1,7 @@
 package com.spring.course.restfulspringbootaws.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.spring.course.restfulspringbootaws.domain.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +32,8 @@ public class User implements Serializable {
     @Column(length = 75, nullable = false, unique = true)
     private String email;
 
+    @Getter(onMethod = @__({@JsonIgnore}))
+    @Setter(onMethod = @__({@JsonProperty}))
     @Column(length = 100, nullable = false)
     private String password;
 
@@ -37,9 +41,11 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Getter(onMethod = @__({@JsonIgnore}))
     @OneToMany(mappedBy = "owner")
     private List<Request> requests = new ArrayList<>();
 
+    @Getter(onMethod = @__({@JsonIgnore}))
     @OneToMany(mappedBy = "owner")
     private List<RequestStage> stages = new ArrayList<>();
 
