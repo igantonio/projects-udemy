@@ -53,4 +53,8 @@ public class UserService {
         return userRepository.findByEmailAndPassword(email, password).orElseThrow(() -> new NotFoundException("There are not found with e-mail = " + email));
     }
 
+    public int updateRole(User user) {
+        return userRepository.updateRole(user.getId(), user.getRole());
+    }
+
 }

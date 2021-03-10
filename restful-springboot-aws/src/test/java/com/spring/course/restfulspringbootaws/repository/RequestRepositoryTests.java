@@ -1,5 +1,6 @@
 package com.spring.course.restfulspringbootaws.repository;
 
+import com.spring.course.restfulspringbootaws.AbstractApplicationTest;
 import com.spring.course.restfulspringbootaws.domain.Request;
 import com.spring.course.restfulspringbootaws.domain.User;
 import com.spring.course.restfulspringbootaws.domain.enums.RequestState;
@@ -7,16 +8,12 @@ import com.spring.course.restfulspringbootaws.domain.enums.Role;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 import java.util.List;
 
-@SpringBootTest
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class RequestRepositoryTests {
+public class RequestRepositoryTests extends AbstractApplicationTest {
 
     @Autowired
     private RequestRepository requestRepository;

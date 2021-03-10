@@ -1,17 +1,16 @@
 package com.spring.course.restfulspringbootaws.repository;
 
 
+import com.spring.course.restfulspringbootaws.AbstractApplicationTest;
 import com.spring.course.restfulspringbootaws.domain.User;
 import com.spring.course.restfulspringbootaws.domain.enums.Role;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-@SpringBootTest
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class UserRepositoryTests {
+
+public class UserRepositoryTests extends AbstractApplicationTest {
 
     @Autowired
     private UserRepository userRepository;
@@ -57,6 +56,13 @@ public class UserRepositoryTests {
         User user = userRepository.findByEmailAndPassword("Igor@gmail.com", "123").get();
 
         Assertions.assertEquals(1L, user.getId());
+    }
+
+    @Test
+    public void updateRole() {
+        int affectsRows = userRepository.updateRole(1L, Role.SIMPLE);
+
+        Assertions.assertEquals(1, affectsRows);
     }
 
 }

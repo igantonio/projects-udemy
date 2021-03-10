@@ -43,8 +43,5 @@ public class RestfulSpringbootAwsApplication implements CommandLineRunner {
 			user.setEmail(i+user.getEmail());
 			userService.save(user);
 		}
-
-
-
 	}
 }

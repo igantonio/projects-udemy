@@ -3,6 +3,7 @@ package com.spring.course.restfulspringbootaws.resource;
 import com.spring.course.restfulspringbootaws.domain.Request;
 import com.spring.course.restfulspringbootaws.domain.User;
 import com.spring.course.restfulspringbootaws.dto.UserLoginDto;
+import com.spring.course.restfulspringbootaws.dto.UserUpdateRoleDto;
 import com.spring.course.restfulspringbootaws.model.PageModel;
 import com.spring.course.restfulspringbootaws.model.PageRequestModel;
 import com.spring.course.restfulspringbootaws.service.RequestService;
@@ -66,6 +67,20 @@ public class UserResource {
         PageRequestModel pageRequestModel = new PageRequestModel(page, size);
         PageModel<Request> pageModel = requestService.listAllByOwnerIdOnLazyMode(id, pageRequestModel);
         return ResponseEntity.ok(pageModel);
+    }
+
+    @PatchMapping("/role/{id}")
+    public ResponseEntity<?> updateRole(
+            @RequestBody UserUpdateRoleDto userUpdateRoleDto,
+            @PathVariable("id") Long id) {
+
+        User user = new User();
+        user.setId(id);
+        user.setRole(userUpdateRoleDto.getRole());
+
+        userService.updateRole(user);
+
+        return ResponseEntity.ok().build();
     }
 
 }
