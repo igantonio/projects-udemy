@@ -1,6 +1,7 @@
 package com.spring.course.restfulspringbootaws.service;
 
 import com.spring.course.restfulspringbootaws.domain.User;
+import com.spring.course.restfulspringbootaws.exception.NotFoundException;
 import com.spring.course.restfulspringbootaws.repository.UserRepository;
 import com.spring.course.restfulspringbootaws.service.util.HashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class UserService {
     }
 
     public User getById(Long id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).orElseThrow(() -> new NotFoundException("There are not found with id = " + id));
     }
 
     public List<User> listAll() {
@@ -34,7 +35,7 @@ public class UserService {
 
     public User login(String email, String password) {
         password = HashUtil.getSecurityHash(password);
-        return userRepository.findByEmailAndPassword(email, password).get();
+        return userRepository.findByEmailAndPassword(email, password).orElseThrow(() -> new NotFoundException("There are not found with e-mail = " + email));
     }
 
 }

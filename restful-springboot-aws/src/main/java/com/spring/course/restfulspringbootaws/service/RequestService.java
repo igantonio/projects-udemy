@@ -2,6 +2,7 @@ package com.spring.course.restfulspringbootaws.service;
 
 import com.spring.course.restfulspringbootaws.domain.Request;
 import com.spring.course.restfulspringbootaws.domain.enums.RequestState;
+import com.spring.course.restfulspringbootaws.exception.NotFoundException;
 import com.spring.course.restfulspringbootaws.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class RequestService {
     }
 
     public Request getById(Long id) {
-        return requestRepository.findById(id).get();
+        return requestRepository.findById(id).orElseThrow(() -> new NotFoundException("There are not found with id = " + id));
     }
 
     public List<Request> listAll() {
