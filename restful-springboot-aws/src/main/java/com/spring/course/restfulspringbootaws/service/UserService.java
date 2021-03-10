@@ -2,9 +2,14 @@ package com.spring.course.restfulspringbootaws.service;
 
 import com.spring.course.restfulspringbootaws.domain.User;
 import com.spring.course.restfulspringbootaws.exception.NotFoundException;
+import com.spring.course.restfulspringbootaws.model.PageModel;
+import com.spring.course.restfulspringbootaws.model.PageRequestModel;
 import com.spring.course.restfulspringbootaws.repository.UserRepository;
 import com.spring.course.restfulspringbootaws.service.util.HashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +36,16 @@ public class UserService {
 
     public List<User> listAll() {
         return userRepository.findAll();
+    }
+
+    public PageModel<User> listAllOnLazyMode(PageRequestModel pageRequestModel) {
+        Pageable pageable = PageRequest.of(pageRequestModel.getPage(), pageRequestModel.getSize());
+        Page<User> page = userRepository.findAll(pageable);
+
+        PageModel<User> pageModel = new PageModel<>((int)page.getTotalElements(), page.getSize(), page.getTotalPages(), page.getContent());
+
+        return pageModel;
+
     }
 
     public User login(String email, String password) {

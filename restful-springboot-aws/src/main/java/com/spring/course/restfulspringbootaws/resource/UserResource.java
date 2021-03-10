@@ -3,6 +3,8 @@ package com.spring.course.restfulspringbootaws.resource;
 import com.spring.course.restfulspringbootaws.domain.Request;
 import com.spring.course.restfulspringbootaws.domain.User;
 import com.spring.course.restfulspringbootaws.dto.UserLoginDto;
+import com.spring.course.restfulspringbootaws.model.PageModel;
+import com.spring.course.restfulspringbootaws.model.PageRequestModel;
 import com.spring.course.restfulspringbootaws.service.RequestService;
 import com.spring.course.restfulspringbootaws.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +41,13 @@ public class UserResource {
     }
 
     @GetMapping()
-    public ResponseEntity<List<User>> listAll() {
-        return ResponseEntity.ok(userService.listAll());
+    public ResponseEntity<PageModel<User>> listAll(
+            @RequestParam("page") int page,
+            @RequestParam("size") int size
+            ) {
+        PageRequestModel pageRequestModel = new PageRequestModel(page, size);
+        PageModel<User> pageModel = userService.listAllOnLazyMode(pageRequestModel);
+        return ResponseEntity.ok(pageModel);
     }
 
     @PostMapping("/login")
@@ -51,8 +58,14 @@ public class UserResource {
     }
 
     @GetMapping("/{id}/requests")
-    public ResponseEntity<List<Request>> listAllRequestsByOwnerId(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(requestService.listAllByOwnerId(id));
+    public ResponseEntity<PageModel<Request>> listAllRequestsByOwnerId(
+            @PathVariable("id") Long id,
+            @RequestParam("page") int page,
+            @RequestParam("size") int size) {
+
+        PageRequestModel pageRequestModel = new PageRequestModel(page, size);
+        PageModel<Request> pageModel = requestService.listAllByOwnerIdOnLazyMode(id, pageRequestModel);
+        return ResponseEntity.ok(pageModel);
     }
 
 }
