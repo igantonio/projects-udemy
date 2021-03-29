@@ -2,7 +2,8 @@ package com.spring.course.restfulspringbootaws.resource;
 
 import com.spring.course.restfulspringbootaws.domain.Request;
 import com.spring.course.restfulspringbootaws.domain.RequestStage;
-import com.spring.course.restfulspringbootaws.domain.User;
+import com.spring.course.restfulspringbootaws.dto.RequestSaveDto;
+import com.spring.course.restfulspringbootaws.dto.RequestUpdateDto;
 import com.spring.course.restfulspringbootaws.model.PageModel;
 import com.spring.course.restfulspringbootaws.model.PageRequestModel;
 import com.spring.course.restfulspringbootaws.service.RequestService;
@@ -12,7 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("requests")
@@ -25,12 +27,14 @@ public class RequestResource {
     private RequestStageService requestStageService;
 
     @PostMapping
-    public ResponseEntity<Request> save(@RequestBody Request request) {
+    public ResponseEntity<Request> save(@RequestBody @Valid RequestSaveDto requestSaveDto) {
+        Request request = requestSaveDto.transformToRequest();
         return ResponseEntity.status(HttpStatus.CREATED).body(requestService.save(request));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Request> update(@PathVariable("id") Long id, @RequestBody Request request) {
+    public ResponseEntity<Request> update(@PathVariable("id") Long id, @RequestBody @Valid RequestUpdateDto requestUpdateDto) {
+        Request request = requestUpdateDto.transformToRequest();
         request.setId(id);
         return ResponseEntity.ok(requestService.save(request));
     }
