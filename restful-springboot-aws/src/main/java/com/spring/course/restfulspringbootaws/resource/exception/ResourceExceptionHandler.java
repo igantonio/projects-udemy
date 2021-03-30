@@ -37,7 +37,7 @@ public class ResourceExceptionHandler extends ResponseEntityExceptionHandler {
                         .stream()
                         .map(ObjectError::getDefaultMessage)
                         .collect(Collectors.toList());
-        
+
         String defaultMessage = "Invalid fields";
         ApiErrorList apiErrorList = new ApiErrorList(HttpStatus.BAD_REQUEST.value(), defaultMessage, new Date(), errors);
 

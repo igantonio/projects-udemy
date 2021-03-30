@@ -33,6 +33,9 @@ public class RestfulSpringbootAwsApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
+
+		/*
 		User user = new User(null, "Igor", "Igor@gmail.com", "123", Role.ADMINISTRATOR, null, null);
 		userService.save(user);
 		Request request = requestService.save(new Request(null, "Novo Leptop HP", "Pretendo obter um laptop HP", new Date(), RequestState.OPEN, user, null));
@@ -42,6 +45,6 @@ public class RestfulSpringbootAwsApplication implements CommandLineRunner {
 			user.setId(null);
 			user.setEmail(i+user.getEmail());
 			userService.save(user);
-		}
+		}*/
 	}
 }
