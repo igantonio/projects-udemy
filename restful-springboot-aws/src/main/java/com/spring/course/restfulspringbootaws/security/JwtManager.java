@@ -2,6 +2,7 @@ package com.spring.course.restfulspringbootaws.security;
 
 import com.spring.course.restfulspringbootaws.constant.SecurityConstants;
 import com.spring.course.restfulspringbootaws.dto.UserLoginResponseDto;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,17 @@ public class JwtManager {
         Long expireIn = calendar.getTimeInMillis();
 
         return new UserLoginResponseDto(jwt, expireIn, SecurityConstants.JWT_PROVIDER);
+    }
+
+    public Claims parseToken(String jwt) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(SecurityConstants.API_KEY.getBytes())
+                .parseClaimsJwt(jwt)
+                .getBody();
+
+
+
+        return claims;
     }
 
 }
