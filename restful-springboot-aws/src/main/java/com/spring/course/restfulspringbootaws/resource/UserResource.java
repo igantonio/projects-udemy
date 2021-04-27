@@ -2,10 +2,7 @@ package com.spring.course.restfulspringbootaws.resource;
 
 import com.spring.course.restfulspringbootaws.domain.Request;
 import com.spring.course.restfulspringbootaws.domain.User;
-import com.spring.course.restfulspringbootaws.dto.UserLoginDto;
-import com.spring.course.restfulspringbootaws.dto.UserSaveDto;
-import com.spring.course.restfulspringbootaws.dto.UserUpdateDto;
-import com.spring.course.restfulspringbootaws.dto.UserUpdateRoleDto;
+import com.spring.course.restfulspringbootaws.dto.*;
 import com.spring.course.restfulspringbootaws.model.PageModel;
 import com.spring.course.restfulspringbootaws.model.PageRequestModel;
 import com.spring.course.restfulspringbootaws.security.JwtManager;
@@ -70,7 +67,7 @@ public class UserResource {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody @Valid UserLoginDto userLoginDto) {
+    public ResponseEntity<UserLoginResponseDto> login(@RequestBody @Valid UserLoginDto userLoginDto) {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userLoginDto.getEmail(), userLoginDto.getPassword());
 
         Authentication auth = authenticationManager.authenticate(token);
@@ -85,7 +82,7 @@ public class UserResource {
                 .map(authority -> authority.getAuthority())
                 .collect(Collectors.toList());
 
-        String jwt = jwtManager.createToken(email, roles);
+        UserLoginResponseDto jwt = jwtManager.createToken(email, roles);
 
         return ResponseEntity.status(HttpStatus.OK).body(jwt);
     }
