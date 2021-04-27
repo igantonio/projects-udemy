@@ -17,47 +17,47 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 import java.util.Date;
 
-//@SpringBootApplication
-//public class RestfulSpringbootAwsApplication implements CommandLineRunner {
-//
-//	@Autowired
-//	private UserService userService;
-//
-//	@Autowired
-//	private RequestService requestService;
-//
-//	@Autowired
-//	private RequestStageService requestStageService;
-//
-//	public static void main(String[] args) {
-//		SpringApplication.run(RestfulSpringbootAwsApplication.class, args);
-//	}
-//
-//	@Override
-//	public void run(String... args) throws Exception {
-//		User user = new User(null, "Igor", "Igor@gmail.com", "123", Role.ADMINISTRATOR, null, null);
-//		userService.save(user);
-//		Request request = requestService.save(new Request(null, "Novo Leptop HP", "Pretendo obter um laptop HP", new Date(), RequestState.OPEN, user, null));
-//		RequestStage requestStage = requestStageService.save(new RequestStage(null, "Foi comprado um novo laptop de marca HD e com 16 GB de RAM", new Date(), RequestState.CLOSED, request, user));
-//
-//		for (int i = 0; i < 15 ; i++) {
-//			user.setId(null);
-//			user.setEmail(i+user.getEmail());
-//			userService.save(user);
-//		}
-//	}
-//}
-
 @SpringBootApplication
-public class RestfulSpringbootAwsApplication extends SpringBootServletInitializer {
+public class RestfulSpringbootAwsApplication implements CommandLineRunner {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(RestfulSpringbootAwsApplication.class);
-	}
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private RequestService requestService;
+
+	@Autowired
+	private RequestStageService requestStageService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(RestfulSpringbootAwsApplication.class, args);
 	}
 
+	@Override
+	public void run(String... args) throws Exception {
+		User user = new User(null, "Igor", "Igor@gmail.com", "123", Role.ADMINISTRATOR, null, null);
+		userService.save(user);
+		Request request = requestService.save(new Request(null, "Novo Leptop HP", "Pretendo obter um laptop HP", new Date(), RequestState.OPEN, user, null));
+		RequestStage requestStage = requestStageService.save(new RequestStage(null, "Foi comprado um novo laptop de marca HD e com 16 GB de RAM", new Date(), RequestState.CLOSED, request, user));
+
+		for (int i = 0; i < 15 ; i++) {
+			user.setId(null);
+			user.setEmail(i+user.getEmail());
+			userService.save(user);
+		}
+	}
 }
+
+//@SpringBootApplication
+//public class RestfulSpringbootAwsApplication extends SpringBootServletInitializer {
+//
+//	@Override
+//	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+//		return builder.sources(RestfulSpringbootAwsApplication.class);
+//	}
+//
+//	public static void main(String[] args) {
+//		SpringApplication.run(RestfulSpringbootAwsApplication.class, args);
+//	}
+//
+//}
